@@ -1,8 +1,8 @@
 homeassistant:
   name: Wohnung 
-  latitude: 50.6847465
-  longitude: 10.9177423
-  elevation: 480 
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: 480  
   unit_system: metric
   time_zone: Europe/Berlin
 
