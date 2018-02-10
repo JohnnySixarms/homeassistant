@@ -111,8 +111,8 @@ sensor:
 switch:
   - platform: fritzdect
     host: 192.168.1.1
-    username: admin
-    password: nukular**1948
+    username: !secret fb_login
+    password: !secret fb_password
   - platform: mqtt
     name: "sonoff1"
     state_topic: "stat/sonoff1/POWER"
