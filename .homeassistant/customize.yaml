@@ -1,0 +1,61 @@
+group.tv_konsolen:
+      friendly_name: TV/Konsolen
+    group.citadel_fritz_box:
+      friendly_name: citadel.fritz.box
+    switch.sonoff1:
+      friendly_name: Display 1
+      icon: mdi:monitor
+    switch.sonoff2:
+      friendly_name: Display 2
+      icon: mdi:monitor
+    switch.sonoff3:
+      friendly_name: Display 3
+      icon: mdi:monitor
+    
+    sensor.fritz_netmonitor:
+      friendly_name: Citadel
+      icon: mdi:home-automation
+    sensor.current_ip:
+      icon: mdi:earth
+    sensor.rate_up:
+      icon: mdi:upload
+    sensor.rate_down:
+      icon: mdi:download
+
+    sensor.weather_wind_speed:
+      friendly_name: Wind
+      icon: mdi:speedometer
+    sensor.weather_wind_direction:
+      friendly_name: Windrichtung
+      icon: mdi:compass
+    sensor.weather_symbol:
+      friendly_name: Aktuelles Wetter
+    sensor.weather_temperature:
+      friendly_name: Temperatur
+    sensor.weather_pressure:
+      friendly_name: Luftdruck
+      icon: mdi:arrow-expand-vertical
+
+    sensor.ws_temp:
+      icon: mdi:thermometer
+
+    sensor.tv_temp:
+      icon: mdi:thermometer
+
+    sensor.ms_temp:
+      icon: mdi:thermometer
+
+    sensor.ls_temp:
+      icon: mdi:thermometer
+
+    sensor.ws_power:
+      icon: mdi:power
+
+    sensor.tv_power:
+      icon: mdi:power
+
+    sensor.ms_power:
+      icon: mdi:power
+
+    sensor.ls_power:
+      icon: mdi:power

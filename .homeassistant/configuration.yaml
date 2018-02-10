@@ -6,71 +6,8 @@ homeassistant:
   unit_system: metric
   time_zone: Europe/Berlin
 
-  # customize: !include customize.yaml
-
-  customize:
-    group.tv_konsolen:
-      friendly_name: TV/Konsolen
-    group.citadel_fritz_box:
-      friendly_name: citadel.fritz.box
-    switch.sonoff1:
-      friendly_name: Display 1
-      icon: mdi:monitor
-    switch.sonoff2:
-      friendly_name: Display 2
-      icon: mdi:monitor
-    switch.sonoff3:
-      friendly_name: Display 3
-      icon: mdi:monitor
-    
-    sensor.fritz_netmonitor:
-      friendly_name: Citadel
-      icon: mdi:home-automation
-    sensor.current_ip:
-      icon: mdi:earth
-    sensor.rate_up:
-      icon: mdi:upload
-    sensor.rate_down:
-      icon: mdi:download
-
-    sensor.weather_wind_speed:
-      friendly_name: Wind
-      icon: mdi:speedometer
-    sensor.weather_wind_direction:
-      friendly_name: Windrichtung
-      icon: mdi:compass
-    sensor.weather_symbol:
-      friendly_name: Aktuelles Wetter
-    sensor.weather_temperature:
-      friendly_name: Temperatur
-    sensor.weather_pressure:
-      friendly_name: Luftdruck
-      icon: mdi:arrow-expand-vertical
-
-    sensor.ws_temp:
-      icon: mdi:thermometer
-
-    sensor.tv_temp:
-      icon: mdi:thermometer
-
-    sensor.ms_temp:
-      icon: mdi:thermometer
-
-    sensor.ls_temp:
-      icon: mdi:thermometer
-
-    sensor.ws_power:
-      icon: mdi:power
-
-    sensor.tv_power:
-      icon: mdi:power
-
-    sensor.ms_power:
-      icon: mdi:power
-
-    sensor.ls_power:
-      icon: mdi:power
-
+  customize: !include customize.yaml
+ 
 # Enables the frontend
 frontend:
 
@@ -93,7 +30,7 @@ updater:
   # include_used_components: true
 
 # Discover some devices automatically
-#discovery:
+discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 #conversation:
@@ -102,7 +39,7 @@ updater:
 history:
 
 # View all events in a logbook
-#logbook:
+logbook:
 
 # Enables a map showing the location of tracked devices
 map:
@@ -115,8 +52,8 @@ mqtt:
  broker: 192.168.1.25
  port: 1883
  client_id: homeassistant
- username: mosquitto
- password: z1976
+ username: !secret mosquitto_login
+ password: !secret mosquitto_password
 
 # Weather prediction
 sensor:
@@ -138,7 +75,7 @@ sensor:
 #      - highClouds
 #      - dewpointTemperature
 
-
+# Template
   - platform: template
     sensors:
       current_ip:
@@ -188,13 +125,6 @@ sensor:
   - platform: fritzbox_netmonitor
     host: 192.168.1.1
 
-# Text to speech
-#tts:
-#  - platform: google
-
-# Cloud
-#cloud:
-
 # Fritzbox
 switch:
   - platform: fritzdect
@@ -225,11 +155,6 @@ switch:
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
-    
-#device_tracker:
-#  - platform: fritz
-
-#ios:
 
 group: !include groups.yaml
 automation: !include automations.yaml
