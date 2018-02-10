@@ -1,0 +1,72 @@
+group:
+
+default_view:
+  view: yes
+  name: Start
+  entities:
+    - group.Workstation
+    - group.tv_konsolen
+    - group.Microserver
+    - group.Ladestation
+    - group.citadel_fritz_box
+    - group.Wetterdaten
+
+Obutto Cockpit:
+  view: yes
+  entities:
+    - group.Obutto
+
+Workstation:
+  entities:
+  - switch.workstation
+  - sensor.ws_temp
+  - sensor.ws_power
+
+TV Konsolen:
+  name: tv_konsolen
+  entities:  
+  - switch.tv_konsolen
+  - sensor.tv_temp
+  - sensor.tv_power
+
+Microserver:
+  entities:
+  - switch.microserver_gen_8
+  - sensor.ms_temp
+  - sensor.ms_power
+
+Ladestation:
+  entities:
+  - switch.ladestation
+  - sensor.ls_temp
+  - sensor.ls_power
+
+citadel_fritz_box:
+  name: citadel_fritz_box
+  entities:
+  - sensor.fritz_netmonitor
+  - sensor.current_ip
+  - sensor.rate_down
+  - sensor.rate_up
+
+Wetterdaten:
+  entities:
+  - sensor.weather_symbol
+  - sensor.weather_summary
+  - sensor.weather_temperature
+  - sensor.weather_wind_direction
+  - sensor.weather_wind_speed
+  - sensor.weather_pressure
+  - sun.sun
+  
+Obutto:
+  control: hidden
+  entities:
+  - switch.workstation
+  - sensor.ws_temp
+  - sensor.ws_power 
+  - switch.sonoff1
+  - switch.sonoff2
+  - switch.sonoff3
+
+  

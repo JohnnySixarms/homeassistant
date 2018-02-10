@@ -1,0 +1,236 @@
+homeassistant:
+  name: Wohnung 
+  latitude: 50.6847465
+  longitude: 10.9177423
+  elevation: 480 
+  unit_system: metric
+  time_zone: Europe/Berlin
+
+  # customize: !include customize.yaml
+
+  customize:
+    group.tv_konsolen:
+      friendly_name: TV/Konsolen
+    group.citadel_fritz_box:
+      friendly_name: citadel.fritz.box
+    switch.sonoff1:
+      friendly_name: Display 1
+      icon: mdi:monitor
+    switch.sonoff2:
+      friendly_name: Display 2
+      icon: mdi:monitor
+    switch.sonoff3:
+      friendly_name: Display 3
+      icon: mdi:monitor
+    
+    sensor.fritz_netmonitor:
+      friendly_name: Citadel
+      icon: mdi:home-automation
+    sensor.current_ip:
+      icon: mdi:earth
+    sensor.rate_up:
+      icon: mdi:upload
+    sensor.rate_down:
+      icon: mdi:download
+
+    sensor.weather_wind_speed:
+      friendly_name: Wind
+      icon: mdi:speedometer
+    sensor.weather_wind_direction:
+      friendly_name: Windrichtung
+      icon: mdi:compass
+    sensor.weather_symbol:
+      friendly_name: Aktuelles Wetter
+    sensor.weather_temperature:
+      friendly_name: Temperatur
+    sensor.weather_pressure:
+      friendly_name: Luftdruck
+      icon: mdi:arrow-expand-vertical
+
+    sensor.ws_temp:
+      icon: mdi:thermometer
+
+    sensor.tv_temp:
+      icon: mdi:thermometer
+
+    sensor.ms_temp:
+      icon: mdi:thermometer
+
+    sensor.ls_temp:
+      icon: mdi:thermometer
+
+    sensor.ws_power:
+      icon: mdi:power
+
+    sensor.tv_power:
+      icon: mdi:power
+
+    sensor.ms_power:
+      icon: mdi:power
+
+    sensor.ls_power:
+      icon: mdi:power
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+#discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+#conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+#logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+#sun:
+
+#mosquitto
+mqtt:
+ broker: 192.168.1.25
+ port: 1883
+ client_id: homeassistant
+ username: mosquitto
+ password: z1976
+
+# Weather prediction
+sensor:
+  - platform: yr
+    name: weather
+    forecast: 24
+    monitored_conditions:
+      - temperature
+      - symbol
+#      - precipitation
+      - windSpeed
+      - pressure
+      - windDirection
+#      - humidity
+#      - fog
+#      - cloudiness
+#      - lowClouds
+#      - mediumClouds
+#      - highClouds
+#      - dewpointTemperature
+
+
+  - platform: template
+    sensors:
+      current_ip:
+        value_template: "{{ states.sensor.fritz_netmonitor.attributes.external_ip }}"
+        friendly_name: "Aktuelle IP"
+#      rate_up:
+#        value_template: "{{ (0.001*states.sensor.fritz_netmonitor.attributes.transmission_rate_up)|round(2) }}"
+#        friendly_name: "Upload"
+#        unit_of_measurement: 'kbit/s'
+#      rate_down:
+#        value_template: "{{ (0.001*states.sensor.fritz_netmonitor.attributes.transmission_rate_down)|round(2) }}"
+#        friendly_name: "Download"
+#        unit_of_measurement: 'kbit/s'
+      ws_temp:
+        value_template: "{{ states.switch.workstation.attributes.temperature }}"
+        friendly_name : "Temperatur Workstation"
+        unit_of_measurement: '°C'
+      tv_temp:
+        value_template: "{{ states.switch.tv_konsolen.attributes.temperature }}"
+        friendly_name : "Temperatur TV/Konsolen"
+        unit_of_measurement: '°C'
+      ms_temp:
+        value_template: "{{ states.switch.microserver_gen_8.attributes.temperature }}"
+        friendly_name : "Temperatur Microserver"
+        unit_of_measurement: '°C'
+      ls_temp:
+        value_template: "{{ states.switch.ladestation.attributes.temperature }}"
+        friendly_name : "Temperatur Ladestation"
+        unit_of_measurement: '°C'
+      ws_power:
+        value_template: "{{ states.switch.workstation.attributes.current_consumption }}"
+        friendly_name : "Verbrauch Workstation"
+        unit_of_measurement: 'W'
+      tv_power:
+        value_template: "{{ states.switch.tv_konsolen.attributes.current_consumption }}"
+        friendly_name : "Verbrauch TV/Konsolen"
+        unit_of_measurement: 'W'
+      ms_power:
+        value_template: "{{ states.switch.microserver_gen_8.attributes.current_consumption }}"
+        friendly_name : "Verbauch Microserver"
+        unit_of_measurement: 'W'
+      ls_power:
+        value_template: "{{ states.switch.ladestation.attributes.current_consumption }}"
+        friendly_name : "Verbrauch Ladestation"
+        unit_of_measurement: 'W'
+
+  - platform: fritzbox_netmonitor
+    host: 192.168.1.1
+
+# Text to speech
+#tts:
+#  - platform: google
+
+# Cloud
+#cloud:
+
+# Fritzbox
+switch:
+  - platform: fritzdect
+    host: 192.168.1.1
+    username: admin
+    password: nukular**1948
+  - platform: mqtt
+    name: "sonoff1"
+    state_topic: "stat/sonoff1/POWER"
+    command_topic: "cmnd/sonoff1/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "sonoff2"
+    state_topic: "stat/sonoff1/POWER"
+    command_topic: "cmnd/sonoff1/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+  - platform: mqtt
+    name: "sonoff3"
+    state_topic: "stat/sonoff1/POWER"
+    command_topic: "cmnd/sonoff1/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+    
+#device_tracker:
+#  - platform: fritz
+
+#ios:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
