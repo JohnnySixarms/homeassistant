@@ -7,7 +7,10 @@ homeassistant:
   time_zone: Europe/Berlin
 
   customize: !include customize.yaml
- 
+
+# Show links to resources in log and frontend
+#introduction:
+
 # Enables the frontend
 frontend:
 
@@ -16,23 +19,15 @@ config:
 
 http:
   api_password: !secret http_password
-  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  # base_url: example.duckdns.org:8123
 
 updater:
 
 discovery:
 
-history:
-
-logbook:
-
-map:
-
 #mosquitto
 mqtt:
- broker: 192.168.1.25
- port: 1883
+ broker: 192.168.1.5
+ port: 18839
  client_id: homeassistant
  username: !secret mosquitto_login
  password: !secret mosquitto_password
@@ -123,21 +118,21 @@ switch:
     retain: true
   - platform: mqtt
     name: "sonoff2"
-    state_topic: "stat/sonoff1/POWER"
-    command_topic: "cmnd/sonoff1/POWER"
+    state_topic: "stat/sonoff2/POWER"
+    command_topic: "cmnd/sonoff2/POWER"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
   - platform: mqtt
     name: "sonoff3"
-    state_topic: "stat/sonoff1/POWER"
-    command_topic: "cmnd/sonoff1/POWER"
+    state_topic: "stat/sonoff3/POWER"
+    command_topic: "cmnd/sonoff3/POWER"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
-
+    
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml

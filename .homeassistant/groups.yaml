@@ -15,7 +15,14 @@ Obutto Cockpit:
   view: yes
   entities:
     - group.Obutto
-
+    - group.phobos
+    - group.handy
+    
+Default:
+  view: yes
+  entities:
+    - group.all_devices
+    
 Workstation:
   entities:
   - switch.workstation
@@ -64,9 +71,19 @@ Obutto:
   entities:
   - switch.workstation
   - sensor.ws_temp
-  - sensor.ws_power 
+  - sensor.ws_power
   - switch.sonoff1
   - switch.sonoff2
   - switch.sonoff3
+  
+Phobos:
+  control: hidden
+  entities:
+  - sensor.phobos_battery_state
+  - sensor.phobos_battery_level
 
+Handy:
+  control: hidden
+  entities:
+  - sensor.battery_handy
   
